@@ -13,6 +13,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
+    public void goToLogin(View view){
+        System.out.println("Go to Register");
+        Intent intent = new Intent( this,LoginActivity.class);
+        startActivity(intent);
+    }
+
     public void goToRegister(View view){
         System.out.println("Go to Register");
         Intent intent = new Intent( this,RegisterActivity.class);
