@@ -39,6 +39,10 @@ public class LoginActivity extends AppCompatActivity {
             String username = cursor.getString(0);
             String password = cursor.getString(1);
 
+        Intent intent = new Intent(this, UserActivity.class);
+        intent.putExtra("username", username);
+        startActivity(intent);
+
             System.out.println(username + "  " + password);
         }
         else {
@@ -46,8 +50,6 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.LENGTH_LONG).show();
         }
 
-//        Intent intent = new Intent(this, UserActivity.class);
-//        intent.putExtra("EXTRA_SESSION_ID", sessionId);
-//        startActivity(intent);
+
     }
 }
