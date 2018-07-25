@@ -85,7 +85,7 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="HCN"
-                android:inputType="text|textPersonName" />
+                android:inputType="textPersonName|number" />
         </TableRow>
 
         <TableRow
@@ -99,7 +99,7 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="Height"
-                android:inputType="text|textPersonName" />
+                android:inputType="number" />
         </TableRow>
 
         <TableRow

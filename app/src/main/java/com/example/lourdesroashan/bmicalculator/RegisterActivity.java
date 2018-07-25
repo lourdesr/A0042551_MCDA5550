@@ -49,7 +49,7 @@ public class RegisterActivity extends AppCompatActivity {
                     Toast.LENGTH_LONG).show();
         }
         else {
-            
+
             DatabaseHelper helper = new DatabaseHelper(this);
             SQLiteDatabase db = helper.getWritableDatabase();
 
@@ -74,7 +74,7 @@ public class RegisterActivity extends AppCompatActivity {
                 if(flag == 0){
                     System.out.println("User Does not Exists");
                     //helper.addUser(uName, uPass, uFullName, uDOB, uHCN, uHT);
-                    Toast.makeText(this, "User "+uFullName+" Registered",
+                    Toast.makeText(this, "New User "+uFullName+" Registered",
                             Toast.LENGTH_LONG).show();
                 }
             }
