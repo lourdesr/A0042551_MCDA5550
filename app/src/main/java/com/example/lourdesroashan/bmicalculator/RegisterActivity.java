@@ -29,7 +29,6 @@ public class RegisterActivity extends AppCompatActivity {
         EditText height = findViewById(R.id.regHeight);
 
         String uName = uname.getText().toString();
-
         String uFullName = name.getText().toString();
         String uPass = password.getText().toString();
         String uDOB = date.getText().toString();

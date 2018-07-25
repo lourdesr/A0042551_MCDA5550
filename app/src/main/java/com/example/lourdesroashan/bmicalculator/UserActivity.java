@@ -42,32 +42,38 @@ public class UserActivity extends AppCompatActivity {
     }
 
     public void calculateBMI(View view){
+
+
         EditText wt = findViewById(R.id.editWeight);
         EditText ht = findViewById(R.id.editHeight);
 
         String htVal = ht.getText().toString();
         String wtVal = wt.getText().toString();
 
-        Double heightValue = Double.parseDouble(htVal);
-        Double weightValue = Double.parseDouble(wtVal);
+        if(htVal.trim().equals("") || wtVal.trim().equals("")){
+            Toast.makeText(this, "All fields are required",
+                    Toast.LENGTH_LONG).show();
+        }
+        else {
+            Double heightValue = Double.parseDouble(htVal);
+            Double weightValue = Double.parseDouble(wtVal);
 
-        Double calc = (weightValue/ (heightValue * heightValue));
-        TextView result = findViewById(R.id.bmiText);
-        result.setText("BMI : "+calc.toString());
+            Double calc = (weightValue/ (heightValue * heightValue));
+            TextView result = findViewById(R.id.bmiText);
+            result.setText("BMI : "+calc.toString());
 
-        String uname = getIntent().getStringExtra("username");
+            String uname = getIntent().getStringExtra("username");
 
-        Date d = new Date();
-        String dateStr = d.toString();
+            Date d = new Date();
+            String dateStr = d.toString();
 
-        DatabaseHelper helper = new DatabaseHelper(this);
+            DatabaseHelper helper = new DatabaseHelper(this);
 
-        helper.addBMI(uname,wtVal,htVal,calc.toString(),dateStr);
+            helper.addBMI(uname,wtVal,htVal,calc.toString(),dateStr);
 
-        Toast.makeText(this, "Added BMI",
-                Toast.LENGTH_LONG).show();
-
-
+            Toast.makeText(this, "Added BMI",
+                    Toast.LENGTH_LONG).show();
+        }
 
     }
 
