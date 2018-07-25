@@ -10,6 +10,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DB_NAME = "inclass";
     private static final int DB_VERSION = 1;
     private  static final String TABLE_NAME = "USER";
+    private  static final String HIST_TABLE = "HISTORY";
 
     public DatabaseHelper(Context context){
         super(context, DB_NAME, null, DB_VERSION);
@@ -26,6 +27,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 +"DOB TEXT,"
                 +"HEALTH_CARD_NUMB TEXT,"
                 +"HEIGHT INTEGER);");
+
+        db.execSQL("CREATE TABLE "+HIST_TABLE+"("
+                +"_id INTEGER PRIMARY KEY AUTOINCREMENT,"
+                +"USERNAME TEXT,"
+                +"HEIGHT TEXT,"
+                +"WEIGHT TEXT,"
+                +"BMI TEXT,"
+                +"EDATE TEXT);");
 //
 //        Date today = new Date();
 //
@@ -60,5 +69,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         personValues.put("DOB",date);
 
         db.insert(TABLE_NAME,null,personValues);
+    }
+
+    public  void addBMI(String username, String weight, String height, String bmi, String date){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues bmiValues = new ContentValues();
+
+        bmiValues.put("HEIGHT",height);
+        bmiValues.put("USERNAME",username);
+        bmiValues.put("WEIGHT",weight);
+        bmiValues.put("BMI",bmi);
+        bmiValues.put("EDATE",date);
+
+        db.insert(HIST_TABLE,null,bmiValues);
     }
 }

@@ -33,14 +33,16 @@ public class LoginActivity extends AppCompatActivity {
                 ePass
         };
 
-        Cursor cursor = db.query("USER", new String[] {"USERNAME","PASSWORD"}, whereClause,whereArgs,null,null,null);
+        Cursor cursor = db.query("USER", new String[] {"USERNAME","PASSWORD","HEIGHT"}, whereClause,whereArgs,null,null,null);
 
         if(cursor.moveToFirst()){
             String username = cursor.getString(0);
             String password = cursor.getString(1);
+            String height = cursor.getString(2);
 
         Intent intent = new Intent(this, UserActivity.class);
         intent.putExtra("username", username);
+        intent.putExtra("height", height);
         startActivity(intent);
 
             System.out.println(username + "  " + password);

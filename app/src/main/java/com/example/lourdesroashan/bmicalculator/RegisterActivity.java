@@ -2,6 +2,8 @@ package com.example.lourdesroashan.bmicalculator;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -18,7 +20,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     public void registerUser(View view)
     {
-
+        int flag = 0;
         EditText uname = findViewById(R.id.regUserName);
         EditText name = findViewById(R.id.regName);
         EditText password = findViewById(R.id.regPassword);
@@ -35,10 +37,35 @@ public class RegisterActivity extends AppCompatActivity {
         String uHT = height.getText().toString();
 
         DatabaseHelper helper = new DatabaseHelper(this);
+        SQLiteDatabase db = helper.getWritableDatabase();
 
-        helper.addUser(uName, uPass, uFullName, uDOB, uHCN, uHT);
-        Toast.makeText(this, "User "+uFullName+" Registered",
-                Toast.LENGTH_LONG).show();
+        String whereClause = "USERNAME = ?";
+        String[] whereArgs = new String[] {
+                uName
+        };
+
+        Cursor cursor = db.query("USER", new String[] {"USERNAME"}, whereClause,whereArgs,null,null,null);
+
+        if(cursor.moveToFirst()) {
+            String username = cursor.getString(0);
+            if(username.equals(uName)){
+                flag = 1;
+                Toast.makeText(this, "Username "+uName+" already exists",
+                        Toast.LENGTH_LONG).show();
+                System.out.println("User Exists");
+            }
+        }
+        else{
+
+            if(flag == 0){
+                System.out.println("User Does not Exists");
+                helper.addUser(uName, uPass, uFullName, uDOB, uHCN, uHT);
+                Toast.makeText(this, "User "+uFullName+" Registered",
+                        Toast.LENGTH_LONG).show();
+            }
+        }
+
+
         System.out.println(uDOB);
 
         Intent intent = new Intent( this,MainActivity.class);
