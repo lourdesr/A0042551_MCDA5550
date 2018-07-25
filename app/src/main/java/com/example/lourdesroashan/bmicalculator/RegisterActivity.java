@@ -12,15 +12,17 @@ import android.widget.Toast;
 
 public class RegisterActivity extends AppCompatActivity {
 
+    public int flag;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        flag = 0;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
     }
 
     public void registerUser(View view)
     {
-        int flag = 0;
+
         EditText uname = findViewById(R.id.regUserName);
         EditText name = findViewById(R.id.regName);
         EditText password = findViewById(R.id.regPassword);
@@ -35,39 +37,55 @@ public class RegisterActivity extends AppCompatActivity {
         String uHCN = hcn.getText().toString();
         String uHT = height.getText().toString();
 
-        DatabaseHelper helper = new DatabaseHelper(this);
-        SQLiteDatabase db = helper.getWritableDatabase();
+        if(     uName.trim().equals("") ||
+                uFullName.trim().equals("") ||
+                uPass.trim().equals("") ||
+                uDOB.trim().equals("") ||
+                uHCN.trim().equals("") ||
+                uHT.trim().equals("")
+                ){
 
-        String whereClause = "USERNAME = ?";
-        String[] whereArgs = new String[] {
-                uName
-        };
-
-        Cursor cursor = db.query("USER", new String[] {"USERNAME"}, whereClause,whereArgs,null,null,null);
-
-        if(cursor.moveToFirst()) {
-            String username = cursor.getString(0);
-            if(username.equals(uName)){
-                flag = 1;
-                Toast.makeText(this, "Username "+uName+" already exists",
-                        Toast.LENGTH_LONG).show();
-                System.out.println("User Exists");
-            }
+            Toast.makeText(this, "All fields are mandatory",
+                    Toast.LENGTH_LONG).show();
         }
-        else{
+        else {
+            
+            DatabaseHelper helper = new DatabaseHelper(this);
+            SQLiteDatabase db = helper.getWritableDatabase();
 
-            if(flag == 0){
-                System.out.println("User Does not Exists");
-                helper.addUser(uName, uPass, uFullName, uDOB, uHCN, uHT);
-                Toast.makeText(this, "User "+uFullName+" Registered",
-                        Toast.LENGTH_LONG).show();
+            String whereClause = "USERNAME = ?";
+            String[] whereArgs = new String[] {
+                    uName
+            };
+
+            Cursor cursor = db.query("USER", new String[] {"USERNAME"}, whereClause,whereArgs,null,null,null);
+
+            if(cursor.moveToFirst()) {
+                String username = cursor.getString(0);
+                if(username.equals(uName)){
+                    flag = 1;
+                    Toast.makeText(this, "Username "+uName+" already exists",
+                            Toast.LENGTH_LONG).show();
+                    System.out.println("User Exists");
+                }
             }
+            else{
+
+                if(flag == 0){
+                    System.out.println("User Does not Exists");
+                    //helper.addUser(uName, uPass, uFullName, uDOB, uHCN, uHT);
+                    Toast.makeText(this, "User "+uFullName+" Registered",
+                            Toast.LENGTH_LONG).show();
+                }
+            }
+
+
+            System.out.println(uDOB);
+
+            Intent intent = new Intent( this,MainActivity.class);
+            startActivity(intent);
+
         }
 
-
-        System.out.println(uDOB);
-
-        Intent intent = new Intent( this,MainActivity.class);
-        startActivity(intent);
     }
 }
