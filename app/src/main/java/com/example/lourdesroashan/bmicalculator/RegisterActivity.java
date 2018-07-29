@@ -1,24 +1,67 @@
 package com.example.lourdesroashan.bmicalculator;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class RegisterActivity extends AppCompatActivity {
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
+
+public class RegisterActivity extends AppCompatActivity implements View.OnClickListener{
 
     public int flag;
+    private int mYear, mMonth, mDay;
+
+    Calendar myCalendar = Calendar.getInstance();
+
+    EditText regDOB;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         flag = 0;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        regDOB = findViewById(R.id.regDOB);
+        regDOB.setOnClickListener(this);
+
     }
+
+
+    @Override
+    public void onClick(View view) {
+
+        if (view == regDOB) {
+            final Calendar c = Calendar.getInstance();
+            mYear = c.get(Calendar.YEAR);
+            mMonth = c.get(Calendar.MONTH);
+            mDay = c.get(Calendar.DAY_OF_MONTH);
+
+
+            DatePickerDialog datePickerDialog = new DatePickerDialog(this,
+                    new DatePickerDialog.OnDateSetListener() {
+
+                        @Override
+                        public void onDateSet(DatePicker view, int year,
+                                              int monthOfYear, int dayOfMonth) {
+
+                            regDOB.setText((monthOfYear+1) + "/" + (dayOfMonth) + "/" + year);
+
+                        }
+                    }, mYear, mMonth, mDay);
+            datePickerDialog.show();
+        }
+    }
+
 
     public void registerUser(View view)
     {
@@ -34,6 +77,7 @@ public class RegisterActivity extends AppCompatActivity {
         String uFullName = name.getText().toString();
         String uPass = password.getText().toString();
         String uDOB = date.getText().toString();
+        System.out.println(uDOB);
         String uHCN = hcn.getText().toString();
         String uHT = height.getText().toString();
 
@@ -88,4 +132,5 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
     }
+
 }
