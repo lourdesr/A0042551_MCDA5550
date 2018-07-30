@@ -46,6 +46,7 @@ public class ListActivity extends android.app.ListActivity {
         Cursor cursor = db.query("HISTORY", new String[] {"HEIGHT","WEIGHT","EDATE","BMI"}, whereClause,whereArgs,null,null,null);
 
         ArrayList<String> histList = new ArrayList<>();
+        histList.add("BMI Entries by "+user);
         histList.add("Entry Date | Height | Weight | BMI");
 
         if(cursor.getCount() > 0){
@@ -63,6 +64,9 @@ public class ListActivity extends android.app.ListActivity {
                 histList.add(e.strUtil(e));
 
             }
+        }
+        else {
+            histList.add("No records added yet");
         }
 
         return histList;

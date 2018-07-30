@@ -13,6 +13,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -71,7 +73,10 @@ public class UserActivity extends AppCompatActivity {
 
             Double calc = (weightValue/ (heightValue * heightValue));
             TextView result = findViewById(R.id.bmiText);
-            result.setText("BMI : "+calc.toString());
+            DecimalFormat df = new DecimalFormat("#.#");
+            df.setRoundingMode(RoundingMode.CEILING);
+
+            result.setText("BMI : "+df.format(calc).toString());
 
             String uname = getIntent().getStringExtra("username");
 
@@ -107,12 +112,6 @@ public class UserActivity extends AppCompatActivity {
                 System.out.println("We don't do BMI for aliens");
             }
 
-
-
-
-
-
-
             Calendar c = Calendar.getInstance();
             int mYear = c.get(Calendar.YEAR);
             int mMonth = c.get(Calendar.MONTH);
@@ -120,11 +119,10 @@ public class UserActivity extends AppCompatActivity {
 
             String dateStr = String.valueOf(mMonth+1) + "/" + String.valueOf(mDay) + "/" + String.valueOf(mYear);
 
-            System.out.println(dateStr);
 
             DatabaseHelper helper = new DatabaseHelper(this);
 
-            helper.addBMI(uname,wtVal,htVal,calc.toString(),dateStr);
+            helper.addBMI(uname,wtVal,htVal,df.format(calc).toString(),dateStr);
 
             Toast.makeText(this, "Added BMI",
                     Toast.LENGTH_LONG).show();

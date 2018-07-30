@@ -45,7 +45,7 @@ public class BMIHelper {
     }
 
     public String strUtil(BMIHelper e){
-        return e.getDate() + " | " + e.getHeight() + " | " + e.getWeight() + " | " + e.getBmi();
+        return e.getDate() + " | " + e.getHeight()+" m" + " | " + e.getWeight()+" kg" + " | " + e.getBmi();
     }
 
 }
