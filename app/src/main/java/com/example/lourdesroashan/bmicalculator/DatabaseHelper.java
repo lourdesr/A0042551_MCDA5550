@@ -7,13 +7,16 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    private static final String DB_NAME = "inclass";
+    private static final String DB_NAME = "prod";
     private static final int DB_VERSION = 1;
     private  static final String TABLE_NAME = "USER";
     private  static final String HIST_TABLE = "HISTORY";
 
     public DatabaseHelper(Context context){
+
         super(context, DB_NAME, null, DB_VERSION);
+
+        //context.deleteDatabase(DB_NAME); // To delete the database
     }
 
     @Override
@@ -26,7 +29,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 +"NAME TEXT,"
                 +"DOB TEXT,"
                 +"HEALTH_CARD_NUMB TEXT,"
-                +"HEIGHT INTEGER);");
+                +"HEIGHT TEXT);");
 
         db.execSQL("CREATE TABLE "+HIST_TABLE+"("
                 +"_id INTEGER PRIMARY KEY AUTOINCREMENT,"

@@ -117,7 +117,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
                 if(flag == 0){
                     System.out.println("User Does not Exists");
-                    //helper.addUser(uName, uPass, uFullName, uDOB, uHCN, uHT);
+                    helper.addUser(uName, uPass, uFullName, uDOB, uHCN, uHT);
                     Toast.makeText(this, "New User "+uFullName+" Registered",
                             Toast.LENGTH_LONG).show();
                 }

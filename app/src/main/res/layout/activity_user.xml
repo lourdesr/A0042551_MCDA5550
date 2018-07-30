@@ -23,8 +23,8 @@
                 android:layout_width="373dp"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Enter Weight"
-                android:inputType="textPersonName" />
+                android:hint="Enter Weight (in Kgs)"
+                android:inputType="number" />
         </TableRow>
 
         <TableRow
@@ -36,8 +36,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Enter Height"
-                android:inputType="textPersonName" />
+                android:hint="Enter Height (in Meters)"
+                android:inputType="number|numberDecimal" />
         </TableRow>
 
         <TableRow
@@ -75,8 +75,33 @@
             <TextView
                 android:id="@+id/bmiText"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:textSize="26sp" />
         </TableRow>
     </TableLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="300dp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/descBMI"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:text=""
+                android:textSize="26sp"/>
+        </LinearLayout>
+    </ScrollView>
 
 </android.support.constraint.ConstraintLayout>

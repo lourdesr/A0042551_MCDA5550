@@ -34,11 +34,13 @@ public class LoginActivity extends AppCompatActivity {
         };
 
         Cursor cursor = db.query("USER", new String[] {"USERNAME","PASSWORD","HEIGHT"}, whereClause,whereArgs,null,null,null);
-
+        System.out.println(cursor.getCount());
         if(cursor.moveToFirst()){
             String username = cursor.getString(0);
             String password = cursor.getString(1);
             String height = cursor.getString(2);
+
+            System.out.println(username);
 
         Intent intent = new Intent(this, UserActivity.class);
         intent.putExtra("username", username);

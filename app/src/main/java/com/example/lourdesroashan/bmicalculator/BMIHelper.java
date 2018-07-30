@@ -1,22 +1,22 @@
 package com.example.lourdesroashan.bmicalculator;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+
 import java.util.ArrayList;
 
 public class BMIHelper {
 
-    public double height;
-    public double weight;
+    public String height;
+    public String weight;
     public String date;
+    public String bmi;
 
-    BMIHelper(double height, double weight){
-        this.height = height;
-        this.weight = weight;
-    }
-    public double getHeight() {
+    public String getHeight() {
         return height;
     }
 
-    public double getWeight() {
+    public String getWeight() {
         return weight;
     }
 
@@ -28,18 +28,25 @@ public class BMIHelper {
         this.date = date;
     }
 
-    public void setHeight(double height) {
+    public void setHeight(String height) {
         this.height = height;
     }
 
-    public void setWeight(double weight) {
+    public void setWeight(String weight) {
         this.weight = weight;
     }
 
+    public String getBmi() {
+        return bmi;
+    }
 
-//
-//    public ArrayList<BMIHelper> getHistory(){
-//
-//    }
+    public void setBmi(String bmi) {
+        this.bmi = bmi;
+    }
+
+    public String strUtil(BMIHelper e){
+        return e.getDate() + " | " + e.getHeight() + " | " + e.getWeight() + " | " + e.getBmi();
+    }
+
 }
 
